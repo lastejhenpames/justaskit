@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* 2026 Deep Space Dark Theme First */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-4xl: var(--radius-4xl);
+}
+
+:root {
+  --background: oklch(0.12 0 0); /* Ultra dark background #050505 approx */
+  --foreground: oklch(0.985 0 0); /* Crisp white text */
+  --card: oklch(0.16 0 0); /* Slightly elevated card */
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.16 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.92 0 0);
+  --primary-foreground: oklch(0.2 0 0);
+  --secondary: oklch(0.25 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.65 0 0); /* Subtle text */
+  --accent: oklch(0.25 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.6 0.25 25);
+  --border: oklch(1 0 0 / 8%); /* Ultra-subtle border from Linear */
+  --input: oklch(1 0 0 / 8%);
+  --ring: oklch(0.6 0 0);
+
+  --radius-sm: calc(var(--radius, 8px) * 0.6);
+  --radius-md: calc(var(--radius, 8px) * 0.8);
+  --radius-lg: var(--radius, 8px);
+  --radius-xl: calc(var(--radius, 8px) * 1.4);
+  --radius-2xl: calc(var(--radius, 8px) * 1.8);
+  --radius-3xl: calc(var(--radius, 8px) * 2.2);
+  --radius-4xl: calc(var(--radius, 8px) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-[var(--border)];
+  }
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] h-full overflow-x-hidden;
+    background-color: #030303; /* Absolute deep space */
+  }
+  html {
+    @apply font-sans h-full;
+  }
+}
+
+/* Base layer for deep space gradients and subtle lighting */
+.space-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.04), transparent 30%),
+              radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.05), transparent 40%),
+              radial-gradient(circle at 50% 100%, rgba(236, 72, 153, 0.03), transparent 50%);
+  filter: blur(80px);
+}
+
+/* Custom Animations */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-float-subtle {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px -3px rgba(168, 85, 247, 0.3), 0 0 5px -1px rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.3); }
+  50% { box-shadow: 0 0 25px -3px rgba(168, 85, 247, 0.6), 0 0 15px -1px rgba(168, 85, 247, 0.4); border-color: rgba(168, 85, 247, 0.6); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-glow-green {
+  0%, 100% { box-shadow: 0 0 10px 0 rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 0 20px 2px rgba(16, 185, 129, 0.5); }
+}
+
+.animate-pulse-glow-green {
+  animation: pulse-glow-green 2s ease-in-out infinite;
+}
+
+@keyframes chat-dot-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+.chat-dot {
+  animation: chat-dot-bounce 1.4s ease-in-out infinite;
+}
+
+/* Glassmorphism Refined for 2026 */
+.glass-panel {
+  background: rgba(20, 20, 22, 0.6); /* Very dark, slight tint */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Ultra subtle */
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05); /* Outer depth + Inner rim light */
+  border-radius: 1.5rem; /* Large smooth radiuses */
+}
+
+.glass-input {
+  background: rgba(10, 10, 12, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  color: #fff;
+}
+
+.glass-input:focus-within {
+  background: rgba(20, 20, 24, 0.6);
+  border-color: rgba(168, 85, 247, 0.4); /* Purple hint on focus */
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Interactive elements */
+button, input, a {
+  @apply outline-none ring-0;
+}
+
+/* Force smooth behaviors globally */
+* {
+  box-sizing: border-box;
+}
+
+.glow-text {
+  text-shadow: 0 0 20px currentColor;
+}
